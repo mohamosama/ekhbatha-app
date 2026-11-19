@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>اخبطها — تحميل اللعبة مجانًا</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0D122B;       /* الأزرق النيلي الداكن */
+      --card-bg: #161E42;
+      --purple: #7C3AED;        /* البنفسجي الكهربائي */
+      --coral: #FF6B4A;         /* البرتقالي المرجاني */
+      --coral-hover: #FF522B;
+      --cyan: #38BDF8;          /* السماوي */
+      --text-main: #F8FAFC;
+      --text-muted: #CBD5E1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(circle at 15% 15%, rgba(124, 58, 237, 0.28), transparent 40%),
+        radial-gradient(circle at 85% 25%, rgba(56, 189, 248, 0.18), transparent 40%);
+      color: var(--text-main);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 28px 18px 60px;
+    }
+
+    /* القسم الرئيسي (Hero) */
+    .hero {
+      background: linear-gradient(145deg, rgba(22, 30, 66, 0.95), rgba(13, 18, 43, 0.95));
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      border-radius: 26px;
+      padding: 32px 22px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-wrap {
+      width: 112px;
+      height: 112px;
+      margin: 0 auto 18px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, var(--purple), var(--cyan));
+      padding: 4px;
+      box-shadow: 0 10px 30px rgba(124, 58, 237, 0.45);
+    }
+
+    .logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 24px;
+      background: var(--bg-dark);
+      display: block;
+    }
+
+    .app-title {
+      font-size: 2.3rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #FFFFFF, var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .app-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 540px;
+      margin: 0 auto 24px;
+    }
+
+    /* زر التحميل الضخم */
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 380px;
+      padding: 18px 28px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, var(--coral), #FF477E);
+      border: none;
+      border-radius: 18px;
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgba(255, 107, 74, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(255, 107, 74, 0.6);
+    }
+
+    .download-btn:active {
+      transform: scale(0.98);
+    }
+
+    .download-note {
+      margin-top: 12px;
+      font-size: 0.88rem;
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    /* شريط المعلومات السريعة */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .meta-item {
+      background: rgba(13, 18, 43, 0.7);
+      border: 1px solid rgba(124, 58, 237, 0.35);
+      border-radius: 16px;
+      padding: 12px 8px;
+    }
+
+    .meta-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .meta-value {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+
+    /* العناوين الداخلية */
+    .section {
+      margin-top: 34px;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 6px;
+      height: 24px;
+      border-radius: 6px;
+      background: linear-gradient(180deg, var(--coral), var(--purple));
+    }
+
+    /* معرض الصور */
+    .screenshots {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .screenshots img {
+      flex: 0 0 auto;
+      width: 210px;
+      height: 410px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 2px solid rgba(56, 189, 248, 0.3);
+      background: var(--card-bg);
+      scroll-snap-align: start;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    }
+
+    /* المميزات */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.05rem;
+      color: var(--cyan);
+      margin-bottom: 6px;
+    }
+
+    .feature-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    /* خطوات التثبيت */
+    .install-box {
+      background: rgba(124, 58, 237, 0.12);
+      border: 1px solid rgba(124, 58, 237, 0.35);
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    .install-box ol {
+      padding-right: 20px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .install-box li {
+      margin-bottom: 8px;
+    }
+
+    .install-box strong {
+      color: #FFFFFF;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 44px;
+      color: #64748B;
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 520px) {
+      .app-title { font-size: 1.9rem; }
+      .meta-grid { gap: 8px; }
+      .meta-value { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- القسم الرئيسي -->
+    <section class="hero">
+      <div class="logo-wrap">
+        <!-- سيتم عرض صورة الشعار التي سترفعها باسم logo.png -->
+        <img src="logo.png" alt="شعار لعبة اخبطها" onerror="this.style.display='none'">
+      </div>
+
+      <h1 class="app-title">اخبطها</h1>
+      <p class="app-subtitle">
+        لعبة التحدي والضحك الأسرع مع صحابك وعيلتك! خمّن الكلمات والصور قبل ما الوقت يخلص وعيش أجواء حماسية في كل قعدة.
+      </p>
+
+      <a class="download-btn" href="https://github.com/mohamosama/ekhbatha-app/releases/latest/download/ekhbatha_game.apk">
+        <span>⬇</span>
+        <span>تحميل التطبيق مجانًا</span>
+      </a>
+      <div class="download-note">تحميل مباشر وآمن (ملف APK للأندرويد — بدون إعلانات)</div>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <span class="meta-label">الإصدار</span>
+          <span class="meta-value">v1.0.0</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">حجم الملف</span>
+          <!-- يمكنك تعديل الرقم هنا حسب الحجم الدقيق للملف -->
+          <span class="meta-value">~75 MB</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">النظام المطلوب</span>
+          <span class="meta-value">Android 7.0+</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- صور من داخل التطبيق -->
+    <section class="section">
+      <h2 class="section-title">لقطات من داخل اللعبة</h2>
+      <div class="screenshots">
+        <!-- ارفع صورك بأسماء screen1.jpg و screen2.jpg و screen3.jpg -->
+        <img src="screen1.jpg" alt="لقطة 1 من لعبة اخبطها" onerror="this.style.display='none'">
+        <img src="screen2.jpg" alt="لقطة 2 من لعبة اخبطها" onerror="this.style.display='none'">
+        <img src="screen3.jpg" alt="لقطة 3 من لعبة اخبطها" onerror="this.style.display='none'">
+      </div>
+    </section>
+
+    <!-- مميزات اللعبة -->
+    <section class="section">
+      <h2 class="section-title">ليه هتلعب اخبطها؟</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>أوضاع لعب متنوعة</h3>
+          <p>العب الوضع الكلاسيكي، الماراثون، أو صمّم مجموعتك الخاصة وتحدى الفرق بنظام الحكم.</p>
+        </div>
+        <div class="feature-card">
+          <h3>مناسبة لكل الأعمار</h3>
+          <p>واجهة سهلة وممتعة للشباب والأطفال، جاهزة للعب فورًا في التجمعات والرحلات.</p>
+        </div>
+        <div class="feature-card">
+          <h3>بدون إنترنت</h3>
+          <p>استمتع باللعب في أي وقت وأي مكان مع صحابك من غير ما تحتاج باقة أو واي فاي.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- طريقة التثبيت -->
+    <section class="section">
+      <h2 class="section-title">طريقة التثبيت في 3 خطوات</h2>
+      <div class="install-box">
+        <ol>
+          <li>اضغط على زر <strong>«تحميل التطبيق مجانًا»</strong> بالأعلى وانتظر اكتمال التحميل.</li>
+          <li>افتح ملف <strong>ekhbatha_game.apk</strong> من إشعارات الهاتف أو مجلد التنزيلات (Downloads).</li>
+          <li>إذا ظهرت رسالة أمان من الهاتف، اختر <strong>«السماح من هذا المصدر»</strong> ثم اضغط <strong>«تثبيت»</strong>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <footer>
+      جميع الحقوق محفوظة © 2026 — لعبة اخبطها
+    </footer>
+
+  </div>
+</body>
+</html>
